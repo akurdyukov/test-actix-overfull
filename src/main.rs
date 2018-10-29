@@ -67,7 +67,9 @@ fn main() {
     env_logger::Builder::from_env(env).init();
 
     System::run(move || {
-        let root = LocalSupervisor::from_registry();
+        let root = LocalSupervisor::new().start();
+        // also does not work
+        //let root = LocalSupervisor::from_registry();
 
         for n in 0..1000 {
             root.do_send(Command::new(n % 5, n));
